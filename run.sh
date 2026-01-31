@@ -32,21 +32,12 @@ sleep 5
 if $DOCKER_COMPOSE ps | grep -q "Up"; then
     echo ""
     echo "Database started successfully!"
+    echo "Database: localhost:5432 (user: co2user, db: co2collect)"
     echo ""
-    echo "Database Information:"
-    echo "   - Host: localhost:5432"
-    echo "   - Database: co2collect"
-    echo "   - Username: co2user"
-    echo "   - Password: co2pass"
+    echo "Starting Spring Boot application..."
+    echo "Press Ctrl+C to stop the application."
     echo ""
-    echo "To run the application manually:"
-    echo "   ./mvnw spring-boot:run"
-    echo ""
-    echo "Useful commands:"
-    echo "   - View logs: $DOCKER_COMPOSE logs -f"
-    echo "   - Stop database: $DOCKER_COMPOSE down"
-    echo "   - Connect to DB: docker exec -it co2-collect-db psql -U co2user -d co2collect"
-    echo ""
+    ./mvnw spring-boot:run
 else
     echo "Error: Database failed to start. Check logs with: $DOCKER_COMPOSE logs"
     exit 1

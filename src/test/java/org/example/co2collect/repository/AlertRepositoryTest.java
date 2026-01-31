@@ -1,5 +1,6 @@
 package org.example.co2collect.repository;
 
+import org.example.co2collect.config.JpaConfig;
 import org.example.co2collect.entity.Alert;
 import org.example.co2collect.entity.Sensor;
 import org.example.co2collect.entity.SensorStatus;
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.boot.jpa.test.autoconfigure.TestEntityManager;
+import org.springframework.context.annotation.Import;
 
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -17,6 +19,7 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
+@Import(JpaConfig.class)
 class AlertRepositoryTest {
 
     @Autowired

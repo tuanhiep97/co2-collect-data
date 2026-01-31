@@ -27,12 +27,11 @@ This service handles measurements from hundreds of thousands of sensors, process
 ## Prerequisites
 
 - Docker Desktop (or Docker Engine + Docker Compose)
-- Java 21 (only if running without Docker)
-- Maven 3.9+ (only if building without Docker)
+- Java 21
 
 ## Quick Start
 
-### Using Docker for Database (Recommended for Development)
+The application is running locally while using Docker for dependent resources (PostgreSQL).
 
 1. **Clone the repository**
    ```bash
@@ -40,29 +39,26 @@ This service handles measurements from hundreds of thousands of sensors, process
    cd co2-collect
    ```
 
-2. **Start the PostgreSQL database**
+2. **Start the application**
    
-   **Linux/macOS:**
+   This script will start the PostgreSQL database via Docker and then launch the Spring Boot application.
    ```bash
    chmod +x run.sh
    ./run.sh
    ```
 
-3. **Run the application manually**
-   ```bash
-   ./mvnw spring-boot:run
-   ```
-
-4. **Access the application**
+3. **Access the application**
    - Application: http://localhost:8081
    - API Documentation: http://localhost:8081/swagger-ui.html
    - Health Check: http://localhost:8081/actuator/health
    - Database: localhost:5432 (user: co2user, db: co2collect)
 
-5. **Stop the database**
-   ```bash
-   docker compose down
-   ```
+4. **Stop the application**
+   - Press `Ctrl+C` to stop the Spring Boot app.
+   - To stop the database resources:
+     ```bash
+     docker compose down
+     ```
 
 ### Running Locally (Without Docker)
 

@@ -46,10 +46,10 @@ public class SensorService {
     private void updateSensorStatus(Sensor sensor, int co2Level, OffsetDateTime timestamp) {
         SensorStatus previousStatus = sensor.getStatus();
 
-        if (co2Level > CO2_THRESHOLD) {
-            handleHighReading(sensor, timestamp);
+        if (co2Level >= CO2_THRESHOLD) {
+            handleHighReading(sensor);
         } else {
-            handleLowReading(sensor, timestamp);
+            handleLowReading(sensor);
         }
 
         if (previousStatus == SensorStatus.ALERT && sensor.getStatus() == SensorStatus.OK) {
@@ -57,7 +57,7 @@ public class SensorService {
         }
     }
 
-    private void handleHighReading(Sensor sensor, OffsetDateTime timestamp) {
+    private void handleHighReading(Sensor sensor) {
         sensor.setConsecutiveHighReadings(sensor.getConsecutiveHighReadings() + 1);
         sensor.setConsecutiveLowReadings(0);
 
@@ -73,7 +73,7 @@ public class SensorService {
         }
     }
 
-    private void handleLowReading(Sensor sensor, OffsetDateTime timestamp) {
+    private void handleLowReading(Sensor sensor) {
         sensor.setConsecutiveHighReadings(0);
 
         if (sensor.getStatus() == SensorStatus.ALERT) {
