@@ -35,7 +35,7 @@ The application is running locally while using Docker for dependent resources (P
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/tuanhiep97/co2-collect-data.git
    cd co2-collect
    ```
 
