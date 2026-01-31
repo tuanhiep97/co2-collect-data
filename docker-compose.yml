@@ -1,0 +1,27 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: co2-collect-db
+    environment:
+      POSTGRES_DB: co2collect
+      POSTGRES_USER: co2user
+      POSTGRES_PASSWORD: co2pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/init-db:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U co2user -d co2collect"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - co2-network
+
+volumes:
+  postgres_data:
+
+networks:
+  co2-network:
+    driver: bridge
